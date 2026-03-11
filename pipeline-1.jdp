@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('PULL'){
             steps{
-                git branch: 'cdec-b48', url: https://github.com/himanshupotpose/Jenkins-pipelines.git
+               git branch: 'Jenkins-pipelines', url: 'https://github.com/himanshupotpose/branching-strategy-project.git'
             }
         }
         stage ('BUILD'){
