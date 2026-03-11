@@ -1,6 +1,6 @@
 node {
     stage('PULL') {
-        git branch: 'Jenkins-pipelines', url: 'https://github.com/himanshupotpose/branching-strategy-project.git'
+        git branch: 'main', url: 'https://github.com/himanshupotpose/branching-strategy-project.git'
         
     }
     stage('BUILD') {
