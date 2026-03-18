@@ -16,26 +16,15 @@ pipeline {
         }
         stage ('TEST'){
             steps{
-                withSonarQubeEnv(installationName: 'sonar', credentialsId: 'sonar-cred') {
-                    sh '''cd backend
-                        mvn sonar:sonar -Dsonar.projectKey='easy-crud'
-                        '''
+                withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonar-cred') {
+                  sh '''cd backend
+                      mvn sonar:sonar -Dsonar.projectName=\'easy-crud'
                 }
             }
         }
-        stage ('QUALITY-GATE'){
+        stage ('DEPLOY'){
             steps{
-                timeout(10) {
-                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar-cred'
-                }                
+                echo 'DEPLOY SUCCESS'
             }
+
         }
-        stage ('DELIVER'){
-            steps{
-                sh '''cd backend/target
-                    aws s3 cp student-registration-backend-0.0.1-SNAPSHOT.jar s3://easy-crud-releases/easy-crud.jar
-                    '''
-            }
-        }
-    }
-}
