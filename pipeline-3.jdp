@@ -17,8 +17,10 @@ pipeline {
         stage ('TEST'){
             steps{
                 withSonarQubeEnv(installationName: 'sonarqube', credentialsId: 'sonar-cred') {
-                  sh '''cd backend
-                      mvn sonar:sonar -Dsonar.projectName=\'easy-crud'
+                    sh '''
+                        cd backend
+                        mvn sonar:sonar -Dsonar.projectName=easy-crud
+                    '''
                 }
             }
         }
@@ -26,5 +28,6 @@ pipeline {
             steps{
                 echo 'DEPLOY SUCCESS'
             }
-
         }
+    }
+}
